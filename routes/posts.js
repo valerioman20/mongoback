@@ -1,6 +1,7 @@
 import express from 'express';
 import Post from '../models/Post.js';
 import cloudinaryUploader from '../config/cloudinaryConfig.js';
+import { authMiddleware } from '../Middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -43,6 +44,9 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// NEW! Proteggi le altre rotte con il middleware di autenticazione
+router.use(authMiddleware);
 
 // Rotta per creare un nuovo post
 router.post("/", cloudinaryUploader.single("cover"), async (req, res) => {

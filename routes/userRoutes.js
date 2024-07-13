@@ -60,7 +60,12 @@ router.post("/", async (req, res) => {
   const user = new User(req.body);
   try {
     const newUser = await user.save();
-    res.status(201).json(newUser);
+
+  const userResponse = newUser.toObject();
+  delete userResponse.password;
+
+
+    res.status(201).json(userResponse);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

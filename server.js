@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js'; // Importa le rotte per gli utenti
 import postRoutes from './routes/posts.js'; // Importa le rotte per i post
 import cors from 'cors';
+import useRoutes from  "./routes/useRoutes.js";
 
 // Carica le variabili d'ambiente
 dotenv.config();
@@ -35,6 +36,7 @@ app.use('/api/users', userRoutes);
 
 // Usa le rotte per i post
 app.use('/api/posts', postRoutes);
+app.use("/api/auth", useRoutes); // rotta autenticazione
 
 // Avvio del server
 app.listen(PORT, () => {
